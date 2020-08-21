@@ -1,0 +1,2 @@
+[workspace]
+members = ["ocean", "build_system", "gradle", "rust"]
