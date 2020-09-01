@@ -3,9 +3,9 @@ use build_system::beans::UserConfiguration;
 use std::process::Command;
 use colored::*;
 
-pub struct Gradle;
+pub struct Maven;
 
-impl BuildSystem for Gradle {
+impl BuildSystem for Maven {
     fn build(&self, folder: &str, _config: &UserConfiguration) -> i32 {
         execute("build", folder).unwrap()
     }
@@ -24,7 +24,7 @@ impl BuildSystem for Gradle {
 }
 
 fn execute(action: &str, path: &str) -> Option<i32> {
-    let mut command = Command::new("gradle");
+    let mut command = Command::new("mvn");
     command.arg(action);
     command.current_dir(path);
 

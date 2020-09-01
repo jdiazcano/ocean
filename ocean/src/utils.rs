@@ -25,7 +25,8 @@ pub fn find_path(config: &UserConfiguration, alias: &str) -> String {
 }
 
 pub fn find_multiple_repos<'c>(config: &'c UserConfiguration, alias: &str) -> Option<Vec<&'c Repository>> {
-    let multiple_repos = config.groups.iter()
+    let vec1 = vec![];
+    let multiple_repos = config.groups.as_ref().unwrap_or(&vec1).into_iter()
         .find(|group| group.name == alias)
         .and_then(|group| Some(group.repositories.iter()
             .map(|alias| find_repository(config, alias))

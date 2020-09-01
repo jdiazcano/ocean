@@ -3,7 +3,7 @@ use serde::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize)]
 pub struct UserConfiguration {
     pub projects: Vec<Project>,
-    pub groups: Vec<RepositoryGroup>
+    pub groups: Option<Vec<RepositoryGroup>>
 }
 
 #[derive(Serialize, Deserialize)]

@@ -1,2 +1,2 @@
 [workspace]
-members = ["ocean", "build_system", "gradle", "rust"]
+members = ["ocean", "build_system", "gradle", "rust", "maven"]

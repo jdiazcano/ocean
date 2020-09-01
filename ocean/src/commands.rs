@@ -1,12 +1,16 @@
+mod syncws;
+mod ws;
+mod project;
+
 use clap::{ArgMatches, App, Arg};
 use build_system::beans::UserConfiguration;
-use crate::utils::{find_repository, find_project, find_path};
+use crate::utils::{find_path};
 
 pub trait ExecutableCommand {
     fn handle(&self, config: UserConfiguration, matches: &ArgMatches);
 }
 
-pub(crate) struct BuildCommand;
+pub struct BuildCommand;
 impl BuildCommand {
     #[inline]
     pub fn command() -> App<'static> {
@@ -14,7 +18,7 @@ impl BuildCommand {
     }
 }
 
-pub(crate) struct CleanCommand;
+pub struct CleanCommand;
 impl CleanCommand {
     #[inline]
     pub fn command() -> App<'static> {
@@ -30,7 +34,7 @@ impl ReleaseCommand {
     }
 }
 
-pub(crate) struct CdpCommand;
+pub struct CdpCommand;
 impl CdpCommand {
     #[inline]
     pub fn command() -> App<'static> {
@@ -46,14 +50,6 @@ impl CdpCommand {
     }
 }
 
-pub(crate) struct WsCommand;
-impl WsCommand {
-    #[inline]
-    pub fn command() -> App<'static> {
-        return App::new("ws");
-    }
-
-    pub fn exec() {
-        println!("{}", env!("WORKSPACE_ROOT"));
-    }
-}
+pub struct WsCommand;
+pub struct ProjectCommand;
+pub struct SyncwsCommand;
