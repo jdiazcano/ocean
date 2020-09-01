@@ -30,7 +30,13 @@ fn subcommands() -> Vec<App<'static>> {
 fn main() {
     let filename = format!("{}.json", whoami::username());
     let path = dirs::home_dir().unwrap().join(".ocean").join(filename);
-    let file_contents = fs::read_to_string(path.canonicalize().unwrap()).expect("Unable to read file");
+    let full_path = path.canonicalize().unwrap();
+    if !full_path.exists() {
+        println!("Workspace file does not exist. (~/.ocean/$USERNAME.json)");
+        return;
+    }
+
+    let file_contents = fs::read_to_string(full_path).expect("Unable to read file");
     let config: UserConfiguration = serde_json::from_str(&file_contents).unwrap();
 
     let matches = App::new("ocean")
