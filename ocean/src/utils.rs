@@ -1,5 +1,6 @@
 use build_system::beans::{UserConfiguration, Project, Repository};
 use std::path::Path;
+use std::env;
 
 pub fn find_project<'c>(config: &'c UserConfiguration, alias: &str) -> &'c Project {
     let option = config.projects.iter()
@@ -14,11 +15,11 @@ pub fn find_repository<'c>(config: &'c UserConfiguration, alias: &str) -> Option
 }
 
 pub fn find_path(config: &UserConfiguration, alias: &str) -> String {
-    let root_path = option_env!("WORKSPACE_ROOT").unwrap();
+    let root_path = env::var("WORKSPACE_ROOT").unwrap();
     let project = find_project(config, alias);
     let repository = find_repository(config, alias).expect("Repository not found");
 
-    let path = Path::new(root_path).join(&project.folder).join(&repository.folder);
+    let path = Path::new(&root_path).join(&project.folder).join(&repository.folder);
     let str_path = path.to_str().unwrap();
 
     str_path.to_owned()

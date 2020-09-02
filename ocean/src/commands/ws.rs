@@ -1,5 +1,6 @@
 use crate::commands::WsCommand;
 use clap::App;
+use std::env;
 
 impl WsCommand {
     #[inline]
@@ -8,6 +9,6 @@ impl WsCommand {
     }
 
     pub fn exec() {
-        println!("{}", option_env!("WORKSPACE_ROOT").unwrap());
+        println!("{}", env::var("WORKSPACE_ROOT").expect("Workspace root not set"));
     }
 }
