@@ -7,11 +7,11 @@ pub struct Maven;
 
 impl BuildSystem for Maven {
     fn build(&self, folder: &str, _config: &UserConfiguration) -> i32 {
-        execute("build", folder).unwrap()
+        execute("compile", folder).unwrap()
     }
 
     fn release(&self, folder: &str, _config: &UserConfiguration) -> i32 {
-        execute("release", folder).unwrap()
+        execute("install", folder).unwrap()
     }
 
     fn clean(&self, folder: &str, _config: &UserConfiguration) -> i32 {
